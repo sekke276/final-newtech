@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 async function AddNewUser(user) {
   const salt = await bcrypt.genSalt(10);
-  const hashedPass = await bcrypt.hash(user, salt);
+  const hashedPass = await bcrypt.hash(user.password, salt);
 
   const newUser = await new User({
     userType: user.userType,

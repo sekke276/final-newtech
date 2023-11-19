@@ -4,7 +4,7 @@ async function httpAddBook(req, res) {
   if (req.body.isAdmin) {
     try {
       const book = req.body;
-      const newBook = Book.AddNewBook(book);
+      const newBook = await Book.AddNewBook(book);
       res.status(200).json(newBook);
     } catch (err) {
       res.status(404).json(err);
