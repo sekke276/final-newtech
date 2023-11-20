@@ -5,9 +5,10 @@ async function httpRegister(req, res) {
   try {
     const user = req.body;
     const newUser = await User.AddNewUser(user);
-    res.status(200).json(newUser);
+    return res.status(200).json(newUser);
   } catch (err) {
     console.log(err);
+    return res.status(500);
   }
 }
 
