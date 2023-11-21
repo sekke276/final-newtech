@@ -17,7 +17,7 @@ async function httpAddCategory(req, res) {
 async function httpGetAllCategory(_, res) {
   try {
     const categories = await GetCategories();
-    res.status(200).json(categories);
+    return res.status(200).json(categories);
   } catch (err) {
     console.log(err);
     return res.status(504).json(err);

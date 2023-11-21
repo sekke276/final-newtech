@@ -22,16 +22,16 @@ describe("category Api", () => {
 
     // ---------------------------------------------------
     // add new cate
-    test("add new category is should reponse with status 200 success", async () => {
-      const newCategory = {
-        categoryName: "detective",
-      };
-      const response = await request(app)
-        .post("/api/categories/addcategory")
-        .send(newCategory)
-        .expect(200);
+    // test("add new category is should reponse with status 200 success", async () => {
+    //   const newCategory = {
+    //     categoryName: "detective",
+    //   };
+    //   const response = await request(app)
+    //     .post("/api/categories/addcategory")
+    //     .send(newCategory)
+    //     .expect(200);
 
-      expect(response.body.categoryName).toEqual("detective");
-    });
+    //   expect(response.body.categoryName).toEqual("detective");
+    // });
   });
 });

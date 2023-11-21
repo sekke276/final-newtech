@@ -95,5 +95,33 @@ describe("user API", () => {
     });
 
     // ---------------------------------------------------
+    // move to active transaction
+    test("move to active transaction", async () => {
+      let adminRole = {
+        isAdmin: true,
+        userId: "6559c815bdc69c283dc51967",
+      };
+
+      const response = await request(app)
+        .put("/api/users/655c5b963ea85a348792467d/move-to-activetransactions")
+        .send(adminRole)
+        .expect(200);
+      expect(response.text).toEqual('"Added to Active Transaction"');
+    });
+
+    // ---------------------------------------------------
+    // move to pre transaction
+    test("move to pretransaction", async () => {
+      let adminRole = {
+        isAdmin: true,
+        userId: "6559c815bdc69c283dc51967",
+      };
+
+      const response = await request(app)
+        .put("/api/users/655c5b963ea85a348792467d/move-to-prevtransactions")
+        .send(adminRole)
+        .expect(200);
+      expect(response.text).toEqual('"Added to Prev transaction Transaction"');
+    });
   });
 });

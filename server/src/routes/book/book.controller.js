@@ -26,7 +26,7 @@ async function httpGetAllBooks(_, res) {
 
 async function httpGetBookById(req, res) {
   try {
-    const book = Book.GetBookById(req.params.id);
+    const book = await Book.GetBookById(req.params.id);
     res.status(200).json(book);
   } catch (err) {
     return res.status(500).json(err);
@@ -62,8 +62,10 @@ async function httpDeleteBook(req, res) {
       await Book.RemoveBook(req.params.id);
       res.status(200).json("Book has been deleted");
     } catch (err) {
-      return res.status(403).json("You dont have permission to delete a book");
+      return res.status(504).json(err);
     }
+  } else {
+    return res.status(403).json("You dont have permission to delete a book");
   }
 }
 

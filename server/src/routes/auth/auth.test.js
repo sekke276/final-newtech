@@ -38,27 +38,46 @@ describe("auth API", () => {
       expect(response.body._id).toEqual("6559c55fbdc69c283dc51955");
     });
 
-    // test("IT should respond with 200 success", async () => {
-    //   const admissionUser = {
-    //     userType: "student",
-    //     userFullName: "Hau Kien Tin",
-    //     admissionId: "19110060",
-    //     employeeId: "",
-    //     age: "22",
-    //     dob: "11/02/2001",
-    //     gender: "male",
-    //     address: "88 a America",
-    //     mobileNumber: "0859092212",
-    //     email: "tin@example.com",
-    //     password: "1234567890",
-    //     isAdmin: false,
-    //   };
+    test("create and delete user should respond with 200 success", async () => {
+      const admissionUser = {
+        userType: "student",
+        userFullName: "Hau Kien Tin",
+        admissionId: "19110060",
+        employeeId: "",
+        age: "22",
+        dob: "11/02/2001",
+        gender: "male",
+        address: "88 a America",
+        mobileNumber: "0859092212",
+        email: "tin@example.com",
+        password: "1234567890",
+        isAdmin: false,
+      };
 
-    //   const response = await request(app)
-    //     .post("/api/auth/register")
-    //     .send(admissionUser)
-    //     .expect("Content-Type", "application/json; charset=utf-8")
-    //     .expect(200);
-    // });
+      const userResponse = await request(app)
+        .post("/api/auth/register")
+        .send(admissionUser)
+        .expect("Content-Type", "application/json; charset=utf-8")
+        .expect(200);
+
+      let adminRole = {
+        isAdmin: false,
+      };
+
+      // delete without permission
+      let response = await request(app)
+        .delete("/api/users/deleteuser/" + userResponse.body._id)
+        .send(adminRole)
+        .expect(403);
+      expect(response.text).toEqual('"You can delete only your account!"');
+
+      // delete with permission
+      adminRole.isAdmin = true;
+      response = await request(app)
+        .delete("/api/users/deleteuser/" + userResponse.body._id)
+        .send(adminRole)
+        .expect(200);
+      expect(response.text).toEqual('"Account has been deleted"');
+    });
   });
 });
