@@ -1,16 +1,18 @@
 const express = require("express");
 const {
-  httpGetUserById,
-  httpGetAllMembers,
-  httpUpdateUser,
-  httpMoveToActiveTransaction,
-  httpMoveToPreTransaction,
-  httpDeleteUser,
+    httpGetUserById,
+    httpGetAllMembers,
+    httpUpdateUser,
+    httpMoveToActiveTransaction,
+    httpMoveToPreTransaction,
+    httpDeleteUser,
+    httpGetTotalMembers,
 } = require("./user.controller");
 
 const userRouter = express.Router();
 
 userRouter.get("/getuser/:id", httpGetUserById);
+userRouter.get("/totalmembers", httpGetTotalMembers);
 userRouter.get("/allmembers", httpGetAllMembers);
 userRouter.put("/updateuser/:id", httpUpdateUser);
 userRouter.put("/:id/move-to-activetransactions", httpMoveToActiveTransaction);
