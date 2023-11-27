@@ -6,8 +6,7 @@ import Switch from "@material-ui/core/Switch";
 
 function Signin() {
   const [isStudent, setIsStudent] = useState(true);
-  const [admissionId, setAdmissionId] = useState();
-  const [employeeId, setEmployeeId] = useState();
+  const [userName, setUserName] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState("");
   const { dispatch } = useContext(AuthContext);
@@ -28,8 +27,8 @@ function Signin() {
   const handleForm = (e) => {
     e.preventDefault();
     isStudent
-      ? loginCall({ admissionId, password }, dispatch)
-      : loginCall({ employeeId, password }, dispatch);
+      ? loginCall({ admissionId: userName, password }, dispatch)
+      : loginCall({ employeeId: userName, password }, dispatch);
   };
 
   return (
@@ -59,9 +58,7 @@ function Signin() {
               name={isStudent ? "admissionId" : "employeeId"}
               required
               onChange={(e) => {
-                isStudent
-                  ? setAdmissionId(e.target.value)
-                  : setEmployeeId(e.target.value);
+                setUserName(e.target.value);
               }}
             />
             <label htmlFor="password">

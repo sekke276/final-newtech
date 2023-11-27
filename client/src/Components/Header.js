@@ -10,7 +10,6 @@ function Header() {
   const [menutoggle, setMenutoggle] = useState(false);
   const { state } = useContext(AuthContext);
 
-  console.log(state, "aa");
   const Toggle = () => {
     setMenutoggle(!menutoggle);
   };
