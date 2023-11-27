@@ -4,7 +4,7 @@ A web app for managing all the activities of a library like managing members and
 
 ## Index ✏️
 
-- [Features Of LCMS 🚀](#features-of-lcms-)
+- [Features Of LMS 🚀](#features-of-lms-)
 - [Setup 🔥](#setup-)
   - [Frontend Setup 🍧](#frontend-setup-)
   - [Backend Setup 🍿](#backend-setup-)
@@ -12,7 +12,7 @@ A web app for managing all the activities of a library like managing members and
 - [Screenshots](#screenshots)
 - [References 💻](#references-)
 
-## Features Of LCMS 🚀
+## Features Of LMS 🚀
 
 - Admin Login and Student Login
 - Admin and Student Dashboard
