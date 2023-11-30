@@ -1,58 +1,47 @@
 import React from "react";
 import "./Allbooks.css";
+import axios from "axios";
+
+const BookCard = (props) => {
+  const image =
+    props.image !== "" && props.image !== undefined
+      ? props.image
+      : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
+  return (
+    <div className="book-card">
+      <img src={image} alt="" />
+      <p className="bookcard-title">{props.title}</p>
+      <p className="bookcard-author">By {props.author}</p>
+      <div className="bookcard-category">
+        <p>{props.category}</p>
+      </div>
+      <div className="bookcard-emptybox"></div>
+    </div>
+  );
+};
 
 function Allbooks() {
+  const API_URL = process.env.REACT_APP_API_URL;
+
+  const [allBooks, setAllBooks] = React.useState([]);
+
+  React.useEffect(() => {
+    axios.get(API_URL + "api/books/allbooks").then((response) => {
+      setAllBooks(response.data);
+    });
+  }, []);
+
   return (
     <div className="books-page">
       <div className="books">
-        <div className="book-card">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp16xiXu1ZtTzbLy-eSwEK4Ng6cUpUZnuGbQ&usqp=CAU"
-            alt=""
-          ></img>
-          <p className="bookcard-title">Wings Of Fire</p>
-          <p className="bookcard-author">By Pranavdhar</p>
-          <div className="bookcard-category">
-            <p>Auto Biography</p>
-          </div>
-          <div className="bookcard-emptybox"></div>
-        </div>
-        <div className="book-card">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-Rb2t6jA5ml7n57qdTZbAOWX1qSfsLCbaOA&usqp=CAU"
-            alt=""
-          ></img>
-          <p className="bookcard-title">The Power Of Your Subconscious Mind</p>
-          <p className="bookcard-author">By Joseph</p>
-          <div className="bookcard-category">
-            <p>Psychology</p>
-          </div>
-          <div className="bookcard-emptybox"></div>
-        </div>
-        <div className="book-card">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRFiDRQ7a-Oo-CnMmnbIMApP1Cq9B5bYx-UA&usqp=CAU"
-            alt=""
-          ></img>
-          <p className="bookcard-title">Elon Musk</p>
-          <p className="bookcard-author">By Elon</p>
-          <div className="bookcard-category">
-            <p>Auto Biography</p>
-          </div>
-          <div className="bookcard-emptybox"></div>
-        </div>
-        <div className="book-card">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-Rb2t6jA5ml7n57qdTZbAOWX1qSfsLCbaOA&usqp=CAU"
-            alt=""
-          ></img>
-          <p className="bookcard-title">The Subtle Art Of Not Giving A Fuck</p>
-          <p className="bookcard-author">By Mark Manson</p>
-          <div className="bookcard-category">
-            <p>COMIC</p>
-          </div>
-          <div className="bookcard-emptybox"></div>
-        </div>
+        {allBooks.map((bookData) => (
+          <BookCard
+            title={bookData.bookName}
+            author={bookData.author}
+            category={bookData.categoryName}
+            image={bookData.image}
+          />
+        ))}
       </div>
     </div>
   );
